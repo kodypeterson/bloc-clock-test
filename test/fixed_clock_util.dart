@@ -13,6 +13,10 @@ class FixedClock {
     return withClock(clock, () => clock.now());
   }
 
+  static void setUp(dynamic Function() body) {
+    withClock(FixedClock.clock, body);
+  }
+
   static void blocTest<B extends BlocBase<State>, State>(
     String description, {
     required B Function() build,

@@ -10,7 +10,9 @@ void main() {
     late TestBloc _testBloc;
 
     setUp(() {
-      _testBloc = TestBloc();
+      FixedClock.setUp(() {
+        _testBloc = TestBloc();
+      });
     });
 
     group('when TestEventDateAUpdated is added', () {
@@ -27,12 +29,12 @@ void main() {
       test('without FixedClock.blocTest - dateA is set', () async {
         await withClock(FixedClock.clock, () async {
           await testBloc(
-            build: () => _testBloc,
-            act: (bloc) => bloc.add(const TestEventDateAUpdated()),
-            expect: () => [
-              TestState(dateA: FixedClock.now()),
-              TestState(dateA: FixedClock.now(), dateB: FixedClock.now())
-            ]);
+              build: () => _testBloc,
+              act: (bloc) => bloc.add(const TestEventDateAUpdated()),
+              expect: () => [
+                    TestState(dateA: FixedClock.now()),
+                    TestState(dateA: FixedClock.now(), dateB: FixedClock.now())
+                  ]);
         });
       });
     });

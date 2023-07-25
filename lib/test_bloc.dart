@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
+import 'package:clock/clock.dart';
 import 'package:equatable/equatable.dart';
 
 part 'test_event.dart';
@@ -11,11 +14,12 @@ class TestBloc extends Bloc<TestEvent, TestState> {
   }
 
   _onTestEventDateAUpdated(TestEventDateAUpdated event, Emitter<TestState> emit) async {
-    emit(TestState(dateA: DateTime.now()));
+    emit(TestState(dateA: clock.now()));
     add(const TestEventDateBUpdated());
   }
 
   _onTestEventDateBUpdated(TestEventDateBUpdated event, Emitter<TestState> emit) async {
-    emit(TestState(dateA: state.dateA, dateB: DateTime.now()));
+    sleep(const Duration(seconds: 1));
+    emit(TestState(dateA: state.dateA, dateB: clock.now()));
   }
 }
