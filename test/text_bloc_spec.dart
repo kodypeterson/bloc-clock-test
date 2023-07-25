@@ -13,6 +13,12 @@ void main() {
       FixedClock.setUp(() {
         _testBloc = TestBloc();
       });
+
+      // Additionally could do:
+      //
+      // withClock(FixedClock.clock, () {
+      //   _testBloc = TestBloc();
+      // });
     });
 
     group('when TestEventDateAUpdated is added', () {
